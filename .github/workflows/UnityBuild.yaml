@@ -46,6 +46,8 @@ jobs:
             Library-${{ matrix.projectPath }}-
             Library-
       - uses: webbertakken/unity-builder@v1.1
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
