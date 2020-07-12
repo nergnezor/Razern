@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GhoulieMove : MonoBehaviour
@@ -17,7 +18,7 @@ public class GhoulieMove : MonoBehaviour
     void Start()
     {
 
-        healthAmount = 1;
+        healthAmount = 0.5f;
 
        //   rb = GetComponent<Rigidbody2D>();
 
@@ -61,16 +62,24 @@ public class GhoulieMove : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other) {
 
-        if (other.gameObject.tag == "EnemyAxe"){
+        if (other.gameObject.tag == "EnemyAxe" || other.gameObject.tag == "EnemyCell"){
             healthAmount -= 0.1f;
-            gameObject.transform.position = new Vector3(0, -0.5f, 0);
+            Vector3 gameObjectPos = gameObject.transform.position;
+            float enemyPosX = other.gameObject.transform.position.x;
+            gameObject.transform.position = (gameObjectPos.x < enemyPosX) ? gameObjectPos + new Vector3(-2, 0, 0) : gameObjectPos + new Vector3(2, 0, 0);
 
+            if (healthAmount <= 0){
+                Destroy(gameObject);
+            }
             Debug.Log("OUCH");
+        }else if (other.gameObject.tag == "Mom"){
+            // Add you found Mom
         }
 
         Debug.Log("Tag is: ");
         Debug.Log(other.gameObject.tag);
     }
+
 
     
 }
