@@ -10,6 +10,8 @@ public class GhoulieMove : MonoBehaviour
     public Rigidbody2D rb;
     public float moveSpeed = 5f;
     public float jumpPower;
+    bool move;
+    Vector2 newPos;
 
     //isGrounded
     public bool isGrounded = false;
@@ -19,13 +21,6 @@ public class GhoulieMove : MonoBehaviour
     {
 
         healthAmount = 0.5f;
-
-       //   rb = GetComponent<Rigidbody2D>();
-
-        // Moves the GameObject using it's transform.
-        //rb.isKinematic = true;
-    //    gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
-     //   gameObject.GetComponent<Rigidbody2D>().detectCollisions = true;
     }
 
     // Update is called once per frame
@@ -34,32 +29,74 @@ public class GhoulieMove : MonoBehaviour
         if (healthAmount <= 0){
             Destroy (gameObject);
         }
-        Jump();
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-        transform.position += movement * Time.deltaTime * moveSpeed;
-        //rb.MovePosition(transform.position + movement * Time.deltaTime * moveSpeed);
+        
+        MoveCharacter();
+        
+        
+
+        
         
     }
 
-    void Jump(){
+    void MoveCharacter(){
+
+                    
+            MoveCharacterKeyboardInput();   //
+            MoveCharFromUiButtons();        // Input from touch screen
+
+        if (Input.GetButtonDown("Jump")){
+
+            Jump();                         // This is called directly from BtnJump 
+            
+        }
+    }
+
+    private void MoveCharacterKeyboardInput(){
+
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+            transform.position += movement * Time.deltaTime * moveSpeed;
+
+    }
+    private void MoveCharFromUiButtons(){
+    
+        if(move){
+            Vector3 movement = new Vector3(newPos.x, 0f, 0f);
+            transform.position += movement * Time.deltaTime * moveSpeed;
+            Debug.Log("SHOULD MOVE");
+        }
+    }
+    
+    public void leftButton(bool isDown){
+        
+        if(isDown){
+            move = true;
+            newPos.x = -1f;
+        }else{
+            move = false;
+        }
+    
+    }
+    public void rightButton(bool isDown){
+    
+        if(isDown){
+            move = true;
+            newPos.x = 1f;
+        }else{
+            move = false;
+        }
+}
+
+    public void Jump(){
+
         isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x - 0.01f, transform.position.y - 0.01f),
         new Vector2 (transform.position.x + 0.01f, transform.position.y - 0.01f), groundLayers);
-        if (Input.GetButtonDown("Jump") && isGrounded == true){
+        if (isGrounded == true){
         print("JUMP");
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
     }
 
-    
-        private void onCollisionEnter(Collision collision){
-
-        //if (collision.collider.tag == "Ground"){
-            print("GROUND");
-            gameObject.GetComponent<GhoulieMove>().isGrounded = true;
-        //}
-
-    }
     private void OnCollisionEnter2D(Collision2D other) {
 
         if (other.gameObject.tag == "EnemyAxe" || other.gameObject.tag == "EnemyCell"){
@@ -79,7 +116,5 @@ public class GhoulieMove : MonoBehaviour
         Debug.Log("Tag is: ");
         Debug.Log(other.gameObject.tag);
     }
-
-
     
 }
