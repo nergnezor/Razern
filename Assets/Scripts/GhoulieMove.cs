@@ -62,12 +62,11 @@ public class GhoulieMove : MonoBehaviour
         if(move){
             Vector3 movement = new Vector3(newPos.x, 0f, 0f);
             transform.position += movement * Time.deltaTime * moveSpeed;
-            Debug.Log("SHOULD MOVE");
         }
     }
     
     public void leftButton(bool isDown){
-        
+
         if(isDown){
             move = true;
             newPos.x = -1f;
@@ -91,7 +90,6 @@ public class GhoulieMove : MonoBehaviour
         isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x - 0.01f, transform.position.y - 0.01f),
         new Vector2 (transform.position.x + 0.01f, transform.position.y - 0.01f), groundLayers);
         if (isGrounded == true){
-        print("JUMP");
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
