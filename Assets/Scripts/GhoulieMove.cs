@@ -87,8 +87,8 @@ public class GhoulieMove : MonoBehaviour
 
     public void Jump(){
 
-        isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x - 0.01f, transform.position.y - 0.01f),
-        new Vector2 (transform.position.x + 0.01f, transform.position.y - 0.01f), groundLayers);
+        isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x/* - 0.001f*/, transform.position.y - 0.001f),
+        new Vector2 (transform.position.x/* + 0.001f*/, transform.position.y - 0.001f), groundLayers);
         if (isGrounded == true){
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
