@@ -14,6 +14,7 @@ public class GhoulieMove : MonoBehaviour
     bool move;
     Vector2 newPos;
     bool gameEnded = false;
+    private Vector2 physicsPrev;
 
     //Jump Related
     public float jumpPower;
@@ -28,7 +29,7 @@ public class GhoulieMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        physicsPrev = Physics2D.gravity; // Used when 
         healthPointsText.text = "HP " + healthAmount.ToString();
 
         part = GetComponent<ParticleSystem>();
@@ -173,7 +174,7 @@ public class GhoulieMove : MonoBehaviour
         {
             //jumpPower -= jumpPowerBoost;
            // isGrounded = true;
-            Physics2D.gravity = new Vector2(0.0f, -10.0f);
+            Physics2D.gravity = physicsPrev;
         }
 
 
