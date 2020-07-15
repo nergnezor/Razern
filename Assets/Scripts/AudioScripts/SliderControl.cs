@@ -9,11 +9,18 @@ public class SliderControl : MonoBehaviour {
         public string parameterName = "MasterVolume";
         public AudioMixer masterMixer;
         public Slider mSlider;
+        private bool muteBtnPtrDw = false; // Avoid pointer down fire every frame
 
-    public void setSLiderPos(){
-        //Debug.Log("Val from Mixer: " + GetBackgroundLevel());
+    public void SetSLiderPosPtrUp(){
+        muteBtnPtrDw = false;
+    }
+    public void SetSliderPosPtrDw(){
+        if (muteBtnPtrDw) return; // Avoid pointer down fire every frame
+        muteBtnPtrDw= true;
+        SetSLiderPos();
+    }
+    private void SetSLiderPos(){
         mSlider.value = CalculateFromDB(GetBackgroundLevel());
-
     }
 
     private float GetBackgroundLevel () {

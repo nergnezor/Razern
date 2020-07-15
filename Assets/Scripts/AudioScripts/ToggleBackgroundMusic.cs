@@ -9,12 +9,22 @@ public class ToggleBackgroundMusic : MonoBehaviour {
     public AudioMixer masterMixer;
     public string parameterName = "MasterVolume";
     private bool justMuted = false;
+    private bool ptrDown = false;
     
     private void Start () {
         Globals.prevMasterVol = GetBackgroundLevel ();
     }
 
-    public void ToggleMusic () {
+    public void ToggleMusicPtrUp(){
+        ptrDown = false;
+    }
+    public void ToggleMusicPtrDw(){
+        if (ptrDown) return;
+        ptrDown = true;
+        ToggleMusic();
+    }
+
+    private void ToggleMusic() {
         float volume = GetBackgroundLevel ();
 
         if (volume != Globals.minVol) {
