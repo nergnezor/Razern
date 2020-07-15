@@ -131,8 +131,9 @@ public void touchButtonJumpPtrDw(){
     private void OnTriggerEnter2D(Collider2D other) {
 
        if (other.gameObject.tag == "MagicBubbles"){
-            jumpPower += jumpPowerBoost;
-        Debug.Log("TRIGGER ");
+            //jumpPower += jumpPowerBoost;
+           // isGrounded = true;
+            Physics2D.gravity = new Vector2(0.0f, 2f);
         }
 
         
@@ -142,8 +143,9 @@ public void touchButtonJumpPtrDw(){
     private void OnTriggerExit2D(Collider2D other) {
 
        if (other.gameObject.tag == "MagicBubbles"){
-            jumpPower -= jumpPowerBoost;
-        Debug.Log("TRIGGER ");
+            //jumpPower -= jumpPowerBoost;
+           // isGrounded = true;
+            Physics2D.gravity = new Vector2(0.0f, -12.0f);
         }
 
         
