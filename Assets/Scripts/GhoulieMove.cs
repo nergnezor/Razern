@@ -145,7 +145,7 @@ public void touchButtonJumpPtrDw(){
        if (other.gameObject.tag == "MagicBubbles"){
             //jumpPower -= jumpPowerBoost;
            // isGrounded = true;
-            Physics2D.gravity = new Vector2(0.0f, -5.0f);
+            Physics2D.gravity = new Vector2(0.0f, -10.0f);
         }
 
         
