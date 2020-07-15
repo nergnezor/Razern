@@ -19,11 +19,19 @@ public class GhoulieMove : MonoBehaviour
     public bool isGrounded = false;
     public bool jumpPtrDown = false;
     public LayerMask groundLayers;
+
+    // Particle System Collision (Flying Ghosts)
+    public ParticleSystem part;
+    public List<ParticleCollisionEvent> collisionEvents;
     
     // Start is called before the first frame update
     void Start()
     {
+
         healthPointsText.text = "HP " + healthAmount.ToString();
+
+        part = GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
     }
 
     // Update is called once per frame
@@ -94,8 +102,8 @@ public void touchButtonJumpPtrDw(){
 }
     public void Jump(){
 
-        isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x/* - 0.001f*/, transform.position.y - 0.001f),
-        new Vector2 (transform.position.x/* + 0.001f*/, transform.position.y - 0.001f), groundLayers);
+        isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x - 2f, transform.position.y - 0.001f),
+        new Vector2 (transform.position.x + 2f, transform.position.y - 0.001f), groundLayers);
         if (isGrounded == true){
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
@@ -104,30 +112,53 @@ public void touchButtonJumpPtrDw(){
 
     private void OnCollisionEnter2D(Collision2D other) {
 
-        if (other.gameObject.tag == "EnemyAxe" || other.gameObject.tag == "EnemyCell"){
-            TakeDamage(other);
+        if (other.gameObject.tag == "EnemyAxe") {
+            TakeDamage(other.gameObject, 25f);
             
+        }else if (other.gameObject.tag == "EnemyCell") {
+            TakeDamage(other.gameObject, 10f);
+
         }else if (other.gameObject.tag == "Mom"){
             // Add you found Mom
             gameEnded = true;
         }
 
-        Debug.Log("Tag is: ");
-        Debug.Log(other.gameObject.tag);
+      //  Debug.Log("Tag is: ");
+      //  Debug.Log(other.gameObject.tag);
     }
 
-    private void TakeDamage(Collision2D other){
-            healthAmount -= 10f;
+    private void TakeDamage(GameObject otherGameObject, float damage){
+            healthAmount -= damage;
             healthPointsText.text = "HP " + healthAmount.ToString();
             Vector3 gameObjectPos = gameObject.transform.position;
-            float enemyPosX = other.gameObject.transform.position.x;
+            float enemyPosX = otherGameObject.transform.position.x;
             gameObject.transform.position = (gameObjectPos.x < enemyPosX) ? gameObjectPos + new Vector3(-2, 0, 0) : gameObjectPos + new Vector3(2, 0, 0);
 
             if (healthAmount <= 0){
                 Destroy(gameObject);
                 Loader.Load(Loader.Scene.MainScene);
             }
-            Debug.Log("OUCH");
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("HIIIIIIITT");
+        TakeDamage(other, healthAmount);
+      /*  int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
+        
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        int i = 0;
+
+        while (i < numCollisionEvents)
+        {
+            if (rb)
+            {
+                Vector3 pos = collisionEvents[i].intersection;
+                Vector3 force = collisionEvents[i].velocity * 10;
+                rb.AddForce(force);
+            }
+            i++;
+        }*/
     }
     
 }

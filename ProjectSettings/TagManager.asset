@@ -10,6 +10,7 @@ TagManager:
   - Mom
   - Walls
   - BackgroundMusic
+  - EnemyGhost
   layers:
   - Default
   - TransparentFX

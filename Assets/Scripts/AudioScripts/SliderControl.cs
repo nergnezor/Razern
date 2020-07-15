@@ -26,7 +26,6 @@ public class SliderControl : MonoBehaviour {
     private float GetBackgroundLevel () {
         float value;
         bool result = masterMixer.GetFloat (parameterName, out value);
-        Debug.Log ("Result SLider: " + result + "Value Slider: " + value);
         if (result) {
         return value;
         } else {
