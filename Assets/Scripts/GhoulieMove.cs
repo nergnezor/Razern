@@ -10,6 +10,7 @@ public class GhoulieMove : MonoBehaviour
     public Text healthPointsText;
     public Rigidbody2D rb;
     public float moveSpeed = 5f;
+    public float jumpPowerBoost = 4f;
     bool move;
     Vector2 newPos;
     bool gameEnded = false;
@@ -126,6 +127,32 @@ public void touchButtonJumpPtrDw(){
       //  Debug.Log("Tag is: ");
       //  Debug.Log(other.gameObject.tag);
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+
+       if (other.gameObject.tag == "MagicBubbles"){
+            jumpPower += jumpPowerBoost;
+        Debug.Log("TRIGGER ");
+        }
+
+        
+      //  Debug.Log(other.gameObject.tag);
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+
+       if (other.gameObject.tag == "MagicBubbles"){
+            jumpPower -= jumpPowerBoost;
+        Debug.Log("TRIGGER ");
+        }
+
+        
+      //  Debug.Log(other.gameObject.tag);
+    }
+
+     private void OnCollisionExit2D(Collision2D other) {
+
+     }
 
     private void TakeDamage(GameObject otherGameObject, float damage){
             healthAmount -= damage;

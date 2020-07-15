@@ -11,6 +11,8 @@ TagManager:
   - Walls
   - BackgroundMusic
   - EnemyGhost
+  - SkyboxCamera
+  - MagicBubbles
   layers:
   - Default
   - TransparentFX
