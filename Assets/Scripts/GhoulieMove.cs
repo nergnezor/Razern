@@ -103,8 +103,8 @@ public void touchButtonJumpPtrDw(){
 }
     public void Jump(){
 
-        isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x - 1.5f, transform.position.y - 0.001f),
-        new Vector2 (transform.position.x + 1.5f, transform.position.y - 0.001f), groundLayers);
+        isGrounded = Physics2D.OverlapArea (new Vector2 (transform.position.x - 0.5f, transform.position.y - 0.001f),
+        new Vector2 (transform.position.x + 0.5f, transform.position.y - 0.001f), groundLayers);
         if (isGrounded == true){
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
@@ -145,7 +145,7 @@ public void touchButtonJumpPtrDw(){
        if (other.gameObject.tag == "MagicBubbles"){
             //jumpPower -= jumpPowerBoost;
            // isGrounded = true;
-            Physics2D.gravity = new Vector2(0.0f, -10.0f);
+            Physics2D.gravity = new Vector2(0.0f, -5.0f);
         }
 
         
@@ -161,7 +161,7 @@ public void touchButtonJumpPtrDw(){
             healthPointsText.text = "HP " + healthAmount.ToString();
             Vector3 gameObjectPos = gameObject.transform.position;
             float enemyPosX = otherGameObject.transform.position.x;
-            gameObject.transform.position = (gameObjectPos.x < enemyPosX) ? gameObjectPos + new Vector3(-2, 0, 0) : gameObjectPos + new Vector3(2, 0, 0);
+            gameObject.transform.position = (gameObjectPos.x < enemyPosX) ? gameObjectPos + new Vector3(-1, 0, 0) : gameObjectPos + new Vector3(1, 0, 0);
 
             if (healthAmount <= 0){
                 Destroy(gameObject);
