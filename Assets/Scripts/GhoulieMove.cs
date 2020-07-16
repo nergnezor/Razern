@@ -83,7 +83,7 @@ public class GhoulieMove : MonoBehaviour
         }
     }
 
-    public void leftButton(bool isDown)
+    public void leftTouchButton(bool isDown) // called from BtnWalkLeft
     {
 
         if (isDown)
@@ -97,7 +97,7 @@ public class GhoulieMove : MonoBehaviour
         }
 
     }
-    public void rightButton(bool isDown)
+    public void rightTouchButton(bool isDown) // Called from BtnWalkRight
     {
 
         if (isDown)

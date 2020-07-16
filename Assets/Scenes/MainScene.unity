@@ -31921,7 +31921,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1509983645}
-          m_MethodName: rightButton
+          m_MethodName: rightTouchButton
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -62844,7 +62844,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1509983645}
-          m_MethodName: leftButton
+          m_MethodName: leftTouchButton
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
