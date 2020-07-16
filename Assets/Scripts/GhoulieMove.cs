@@ -37,28 +37,28 @@ public class GhoulieMove : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (healthAmount <= 0)
         {
             Destroy(gameObject);
         }
 
-        var scale = transform.localScale;
-        if (rb.velocity.y != 0)
-            scale.y = 1 - rb.velocity.y / 50;
-        else if (scale.y > 1)
-            scale.y = Mathf.Max(1, scale.y * 0.8f);
-        transform.localScale = scale;
-
+        CompressCharacter();
         MoveCharacter();
 
-    }
-    void Update()
-    {
         if (Input.GetButtonDown("Jump"))
             Jump();                         // This is called directly from BtnJump 
 
+        void CompressCharacter()
+        {
+            var scale = transform.localScale;
+            if (rb.velocity.y != 0)
+                scale.y = 1 - rb.velocity.y / 50;
+            else if (scale.y > 1)
+                scale.y = Mathf.Max(1, scale.y * 0.8f);
+            transform.localScale = scale;
+        }
     }
     void MoveCharacter()
     {
@@ -70,9 +70,10 @@ public class GhoulieMove : MonoBehaviour
     private void MoveCharacterKeyboardInput()
     {
         if (gameEnded) return;
-        var movement = new Vector2(Input.GetAxis("Horizontal"), 0f);
-        rb.AddForce(movement * 100, ForceMode2D.Force);
-
+        // var movement = new Vector2(Input.GetAxis("Horizontal"), 0f);
+        // rb.AddForce(movement * 100, ForceMode2D.Force);
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        transform.position += movement * Time.deltaTime * moveSpeed;
     }
     private void MoveCharFromUiButtons()
     {
