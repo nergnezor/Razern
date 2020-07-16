@@ -36,7 +36,7 @@ public class GhoulieMove : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (healthAmount <= 0)
         {
@@ -45,28 +45,32 @@ public class GhoulieMove : MonoBehaviour
 
         var scale = transform.localScale;
         if (rb.velocity.y != 0)
-            scale.y = 1 - rb.velocity.y / 30;
+            scale.y = 1 - rb.velocity.y / 50;
         else if (scale.y > 1)
-            scale.y = Mathf.Max(1, scale.y - 0.2f);
+            scale.y = Mathf.Max(1, scale.y * 0.8f);
         transform.localScale = scale;
+
         MoveCharacter();
 
     }
+    void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+            Jump();                         // This is called directly from BtnJump 
 
+    }
     void MoveCharacter()
     {
         MoveCharacterKeyboardInput();   //
         MoveCharFromUiButtons();        // Input from touch screen
 
-        if (Input.GetButtonDown("Jump"))
-            Jump();                         // This is called directly from BtnJump 
     }
 
     private void MoveCharacterKeyboardInput()
     {
         if (gameEnded) return;
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-        transform.position += movement * Time.deltaTime * moveSpeed;
+        var movement = new Vector2(Input.GetAxis("Horizontal"), 0f);
+        rb.AddForce(movement * 100, ForceMode2D.Force);
 
     }
     private void MoveCharFromUiButtons()
@@ -121,9 +125,7 @@ public class GhoulieMove : MonoBehaviour
         isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 2f, transform.position.y - 0.001f),
         new Vector2(transform.position.x + 2f, transform.position.y - 0.001f), groundLayers);
         if (isGrounded)
-        {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        }
 
     }
 
