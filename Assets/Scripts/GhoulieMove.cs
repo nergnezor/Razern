@@ -37,31 +37,31 @@ public class GhoulieMove : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (healthAmount <= 0)
         {
             Destroy(gameObject);
         }
 
-        var scale = transform.localScale;
-        if (rb.velocity.y != 0)
-            scale.y = 1 - rb.velocity.y / 50;
-        else if (scale.y > 1)
-            scale.y = Mathf.Max(1, scale.y * 0.8f);
-        transform.localScale = scale;
-       
+        CompressCharacter();
         MoveCharacter();
             
         
 
-    }
-    void Update()
-    {
         if (Input.GetButtonDown("Jump"))
             Jump();                         // This is called directly from BtnJump 
        
 
+        void CompressCharacter()
+        {
+            var scale = transform.localScale;
+            if (rb.velocity.y != 0)
+                scale.y = 1 - rb.velocity.y / 50;
+            else if (scale.y > 1)
+                scale.y = Mathf.Max(1, scale.y * 0.8f);
+            transform.localScale = scale;
+        }
     }
     void MoveCharacter()
     {
