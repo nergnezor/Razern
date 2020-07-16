@@ -80,7 +80,6 @@ public class GhoulieMove : MonoBehaviour
         float mH = Input.GetAxis ("Horizontal");
         float mV = Input.GetAxis ("Vertical");
         rb.velocity = new Vector3 (mH * moveSpeed, rb.velocity.y, mV * moveSpeed);
-        Debug.Log("Vel " + rb.velocity);
 
     }
     private void MoveCharFromUiButtons()
@@ -88,8 +87,9 @@ public class GhoulieMove : MonoBehaviour
         if (gameEnded) return;
         if (move)
         {
-            Vector3 movement = new Vector3(newPos.x, 0f, 0f);
-            transform.position += movement * Time.deltaTime * moveSpeed;
+            float mH = Input.GetAxis ("Horizontal");
+        //float mV = Input.GetAxis ("Vertical");
+        rb.velocity = new Vector3 (newPos.x * moveSpeed, rb.velocity.y, 0f);
         }
     }
 
