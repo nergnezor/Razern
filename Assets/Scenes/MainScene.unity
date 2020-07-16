@@ -5700,7 +5700,7 @@ GameObject:
   - component: {fileID: 140968613}
   - component: {fileID: 140968616}
   m_Layer: 8
-  m_Name: Tilemap
+  m_Name: Tilemap Stone
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
