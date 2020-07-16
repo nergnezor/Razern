@@ -31882,7 +31882,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1509983645}
-          m_MethodName: rightButton
+          m_MethodName: rightTouchButton
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -62365,7 +62365,7 @@ MonoBehaviour:
   healthAmount: 100
   healthPointsText: {fileID: 638277317}
   rb: {fileID: 1509983646}
-  moveSpeed: 10
+  moveSpeed: 6
   jumpPowerBoost: 4
   jumpPower: 100
   isGrounded: 0
@@ -63006,7 +63006,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1509983645}
-          m_MethodName: leftButton
+          m_MethodName: leftTouchButton
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
