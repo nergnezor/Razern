@@ -62367,7 +62367,7 @@ MonoBehaviour:
   rb: {fileID: 1509983646}
   moveSpeed: 6
   jumpPowerBoost: 4
-  jumpPower: 50
+  jumpPower: 43
   isGrounded: 0
   jumpPtrDown: 0
   groundLayers:
@@ -62389,7 +62389,7 @@ Rigidbody2D:
   m_Mass: 3
   m_LinearDrag: 0.1
   m_AngularDrag: 0.1
-  m_GravityScale: 3
+  m_GravityScale: 2.7
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0

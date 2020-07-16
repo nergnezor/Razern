@@ -197,7 +197,8 @@ public class GhoulieMove : MonoBehaviour
         Vector3 gameObjectPos = gameObject.transform.position;
         float enemyPosX = otherGameObject.transform.position.x;
         gameObject.transform.position = (gameObjectPos.x < enemyPosX) ? gameObjectPos + new Vector3(-1, 0, 0) : gameObjectPos + new Vector3(1, 0, 0);
-
+        //rb.AddForce(-transform.forward * 500);
+        //rb.velocity = new Vector3 (newPos.x * -100, rb.velocity.y, 0f);
         if (healthAmount <= 0)
         {
             Destroy(gameObject);
