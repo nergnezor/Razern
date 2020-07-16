@@ -115,17 +115,9 @@ public class GhoulieMove : MonoBehaviour
         if (jumpPtrDown) return; // Avoid pointer down fireing a jump call every frame
         jumpPtrDown = true;
         Jump();
-
-        isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.001f),
-        new Vector2(transform.position.x + 0.5f, transform.position.y - 0.001f), groundLayers);
-        if (isGrounded == true)
-        {
-            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        }
     }
     public void Jump()
     {
-
         isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 2f, transform.position.y - 0.001f),
         new Vector2(transform.position.x + 2f, transform.position.y - 0.001f), groundLayers);
         if (isGrounded)
@@ -173,7 +165,7 @@ public class GhoulieMove : MonoBehaviour
         if (other.gameObject.tag == "MagicBubbles")
         {
             //jumpPower -= jumpPowerBoost;
-           // isGrounded = true;
+            // isGrounded = true;
             Physics2D.gravity = physicsPrev;
         }
 
