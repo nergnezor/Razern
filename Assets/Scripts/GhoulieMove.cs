@@ -29,6 +29,7 @@ public class GhoulieMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         physicsPrev = Physics2D.gravity; // Used when 
         healthPointsText.text = "HP " + healthAmount.ToString();
 
