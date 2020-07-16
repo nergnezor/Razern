@@ -7,11 +7,16 @@ public class GhostStatueCollider : MonoBehaviour
 {
 
     private GameObject ghostTextMesh;
+    MeshRenderer textMeshRend;
     // Start is called before the first frame update
+    public FadeTextMesh fadeTextMeshScript;
+
     void Start()
     {
         ghostTextMesh = GameObject.Find("GhostText"); // Grab the object
-        ghostTextMesh.SetActive(false);               // It should not be visable at start
+        textMeshRend = ghostTextMesh.GetComponent<MeshRenderer> ();
+       // ghostTextMesh.SetActive(false);               // It should not be visable at start
+        
     }
 
     // Update is called once per frame
@@ -22,13 +27,18 @@ public class GhostStatueCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ghostTextMesh.SetActive(true);
+        //ghostTextMesh.SetActive(true);
+        //ghostTextMesh.StartFadeOut();
+        Debug.Log("GhostStartFadeIn");
+        fadeTextMeshScript.StartFadeIn();
+       //fadeTextMeshScript.fade(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("Trigger Ghost");
-        ghostTextMesh.SetActive(false);
+        Debug.Log("GhostStartFadeOut");
+        //ghostTextMesh.SetActive(false);
+        fadeTextMeshScript.StartFadeOut();
 
     }
 
