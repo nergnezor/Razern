@@ -151,6 +151,7 @@ public class GhoulieMove : MonoBehaviour
                 break;
             case "Mom":
                 // Add you found Mom
+                Globals.foundMom = true;
                 Globals.gameEnded = true;
                 break;
         }
@@ -202,7 +203,8 @@ public class GhoulieMove : MonoBehaviour
         if (healthAmount <= 0)
         {
             Destroy(gameObject);
-            Loader.Load(Loader.Scene.MainScene);
+            Globals.gameEnded = true;
+            //Loader.Load(Loader.Scene.MainScene);
         }
     }
 

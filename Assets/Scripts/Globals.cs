@@ -7,4 +7,5 @@ public static class Globals {
         public static float maxMasterVol = 0;
         public static float prevMasterVol = 0;
         public static bool gameEnded = false;
+        public static bool foundMom = false;
 }
