@@ -13,7 +13,7 @@ public class GhoulieMove : MonoBehaviour
     public float jumpPowerBoost = 8f;
     bool move;
     Vector2 newPos;
-    bool gameEnded = false;
+    //bool gameEnded = false;
     private Vector2 physicsPrev;
 
     //Jump Related
@@ -72,7 +72,7 @@ public class GhoulieMove : MonoBehaviour
 
     private void MoveCharacterKeyboardInput()
     {
-        if (gameEnded) return;
+        if (Globals.gameEnded) return;
         
         //var movement = new Vector2(Input.GetAxis("Horizontal"), 0f);
         
@@ -84,7 +84,7 @@ public class GhoulieMove : MonoBehaviour
     }
     private void MoveCharFromUiButtons()
     {
-        if (gameEnded) return;
+        if (Globals.gameEnded) return;
         if (move)
         {
             float mH = Input.GetAxis ("Horizontal");
@@ -151,7 +151,7 @@ public class GhoulieMove : MonoBehaviour
                 break;
             case "Mom":
                 // Add you found Mom
-                gameEnded = true;
+                Globals.gameEnded = true;
                 break;
         }
         // Debug.Log("Tag is: " + other.gameObject.tag);
